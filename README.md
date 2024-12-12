@@ -10,3 +10,20 @@ A solução desenvolvida implementa funcionalidades que permitem o cadastro de e
 
 Os principais resultados incluem um sistema funcional capaz de gerenciar eventos em tempo real, realizar apostas de forma descentralizada e atualizar automaticamente os saldos dos usuários com base nos resultados. Esse sistema, acompanhado de documentação técnica robusta, reforça o potencial da tecnologia blockchain para transformar o mercado de apostas online e atender às demandas de usuários e regulamentadores por soluções mais confiáveis e acessíveis.
 
+# Fundamentação Teórica
+O blockchain é uma tecnologia revolucionária que ganhou destaque nos últimos anos como uma solução para problemas de transparência, segurança e descentralização em sistemas de armazenamento e transação de dados. Originalmente introduzido em 2008 como a infraestrutura subjacente do Bitcoin, o blockchain evoluiu para um paradigma multifacetado, utilizado em diversas áreas, incluindo fintech, supply chain, saúde e, neste caso, apostas online descentralizadas.
+## Conceito e Estrutura do Blockchain
+O blockchain, ou cadeia de blocos, é um tipo de banco de dados distribuído que registra transações de forma imutável em blocos interligados. Cada bloco contém um conjunto de transações validadas, um timestamp, e uma referência ao bloco anterior por meio de um hash criptográfico. Esta estrutura sequencial e encadeada garante a integridade e a segurança dos dados armazenados.
+
+As principais camadas que compõem um sistema blockchain incluem:
+
+### 1 Camada de Rede: 
+Responsável pela comunicação entre os nós da rede, permitindo o compartilhamento e sincronização das informações.
+### 2 Camada de Consenso: 
+Define o método pelo qual os participantes da rede concordam sobre o estado do ledger. Protocolos como Proof of Work (PoW), Proof of Stake (PoS) e Proof of Authority (PoA) são exemplos de mecanismos de consenso.
+### 3 Camada de Dados: 
+Armazena as informações registradas na forma de blocos encadeados.
+### 4 Camada de Aplicativos: 
+Facilita a interação com a blockchain por meio de interfaces gráficas ou APIs, permitindo o desenvolvimento de aplicações descentralizadas (dApps).
+
+
