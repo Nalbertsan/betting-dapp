@@ -115,11 +115,11 @@ Os testes demonstraram que o sistema está funcional e atende aos requisitos pla
 
 ## Discussão sobre Falhas
 Apesar dos resultados positivos, algumas falhas foram observadas:
-# Interface de Usuário: 
+### Interface de Usuário: 
 Alguns elementos da interface apresentaram lentidão ao carregar dados em redes com alta latência. Isso sugere a necessidade de otimização da integração frontend-backend.
-# Simulação em Grande Escala: 
+### Simulação em Grande Escala: 
 Durante simulações com um grande número de eventos simultâneos, o desempenho do sistema foi impactado, evidenciando um ponto de melhoria em relação à escalabilidade.
-# Documentação: 
+### Documentação: 
 Embora a documentação esteja clara, identificamos áreas onde mais exemplos práticos poderiam ser adicionados para facilitar a compreensão por novos desenvolvedores.
 
 # Conclusão
