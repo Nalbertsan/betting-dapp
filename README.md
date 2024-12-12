@@ -52,9 +52,12 @@ O bloco é adicionado à cadeia e replicado em todos os nós da rede, atualizand
 
 ## Aplicabilidade em Sistemas de Apostas Online
 A aplicação do blockchain em sistemas de apostas online, como o desenvolvido para este projeto, aborda desafios críticos associados a modelos tradicionais:
-### Eliminação de Intermediários: #### A descentralização remove a necessidade de casas de apostas, reduzindo custos e aumentando a eficiência.
-### Confiabilidade: #### O registro imutável das transações garante que os resultados e os pagamentos sejam transparentes e verificáveis.
-### Mitigação de Bloqueios: #### A resistência à censura permite operações mesmo em ambientes regulatórios rigorosos.
+### Eliminação de Intermediários: 
+A descentralização remove a necessidade de casas de apostas, reduzindo custos e aumentando a eficiência.
+### Confiabilidade: 
+O registro imutável das transações garante que os resultados e os pagamentos sejam transparentes e verificáveis.
+### Mitigação de Bloqueios: 
+A resistência à censura permite operações mesmo em ambientes regulatórios rigorosos.
 
 
 
