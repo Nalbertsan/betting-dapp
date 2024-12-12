@@ -16,7 +16,6 @@ O blockchain é uma tecnologia revolucionária que ganhou destaque nos últimos 
 O blockchain, ou cadeia de blocos, é um tipo de banco de dados distribuído que registra transações de forma imutável em blocos interligados. Cada bloco contém um conjunto de transações validadas, um timestamp, e uma referência ao bloco anterior por meio de um hash criptográfico. Esta estrutura sequencial e encadeada garante a integridade e a segurança dos dados armazenados.
 
 As principais camadas que compõem um sistema blockchain incluem:
-
 ### 1. Camada de Rede: 
 Responsável pela comunicação entre os nós da rede, permitindo o compartilhamento e sincronização das informações.
 ### 2. Camada de Consenso: 
