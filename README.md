@@ -17,13 +17,44 @@ O blockchain, ou cadeia de blocos, é um tipo de banco de dados distribuído que
 
 As principais camadas que compõem um sistema blockchain incluem:
 
-### 1 Camada de Rede: 
+### 1. Camada de Rede: 
 Responsável pela comunicação entre os nós da rede, permitindo o compartilhamento e sincronização das informações.
-### 2 Camada de Consenso: 
+### 2. Camada de Consenso: 
 Define o método pelo qual os participantes da rede concordam sobre o estado do ledger. Protocolos como Proof of Work (PoW), Proof of Stake (PoS) e Proof of Authority (PoA) são exemplos de mecanismos de consenso.
-### 3 Camada de Dados: 
+### 3. Camada de Dados: 
 Armazena as informações registradas na forma de blocos encadeados.
-### 4 Camada de Aplicativos: 
+### 4. Camada de Aplicativos: 
 Facilita a interação com a blockchain por meio de interfaces gráficas ou APIs, permitindo o desenvolvimento de aplicações descentralizadas (dApps).
+
+## Características Principais
+### 1. Descentralização:
+Em vez de depender de uma entidade central, o blockchain opera em uma rede distribuída de nós, cada um mantendo uma cópia do ledger. Essa estrutura aumenta a resiliência e a segurança do sistema.
+### 2.Imutabilidade:
+Uma vez que uma transação é registrada e validada, ela não pode ser alterada ou removida. Essa propriedade é garantida pelos algoritmos criptográficos e pela natureza sequencial dos blocos.
+### 3. Transparência:
+Qualquer pessoa pode visualizar as transações em blockchains públicas, aumentando a confiança no sistema. Em blockchains privadas, o acesso é restrito a participantes autorizados.
+### 4. Segurança:
+A utilização de criptografia assimétrica protege os dados e garante a autenticação das transações. Além disso, os mecanismos de consenso previnem ataques como o "double spending".
+### 5. Programabilidade:
+Smart contracts, ou contratos inteligentes, permitem a automação de transações e processos sem a necessidade de intermediários. Esses contratos são programas que são executados automaticamente quando as condições predefinidas são atendidas.
+
+## Funcionamento do Blockchain
+O processo básico de funcionamento do blockchain pode ser descrito em quatro etapas principais:
+
+### 1. Início da Transação: 
+Um usuário inicia uma transação que é transmitida para a rede.
+### 2. Validação: 
+Os nós verificam a transação usando as regras do protocolo e validam se é legítima.
+### 3. Criação de Bloco: 
+Transações validadas são agrupadas em um bloco que inclui um hash do bloco anterior.
+### 4. Adicionando o Bloco: 
+O bloco é adicionado à cadeia e replicado em todos os nós da rede, atualizando o estado do ledger.
+
+## Aplicabilidade em Sistemas de Apostas Online
+A aplicação do blockchain em sistemas de apostas online, como o desenvolvido para este projeto, aborda desafios críticos associados a modelos tradicionais:
+### Eliminação de Intermediários: #### A descentralização remove a necessidade de casas de apostas, reduzindo custos e aumentando a eficiência.
+### Confiabilidade: #### O registro imutável das transações garante que os resultados e os pagamentos sejam transparentes e verificáveis.
+### Mitigação de Bloqueios: #### A resistência à censura permite operações mesmo em ambientes regulatórios rigorosos.
+
 
 
