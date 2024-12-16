@@ -152,4 +152,5 @@ describe("BettingSystem", function () {
 
     await expect(bettingSystem.finalizeEvent(0, "Invalido")).to.be.revertedWith("Invalid result");
   });
+
 });

@@ -10,7 +10,14 @@ contract BettingSystem {
         mapping(string => uint) totalBets; // Total apostado em cada resultado
         bool finalized;
         string result;
-        uint totalPool; // Total de apostas no evento
+        uint totalPool;
+    }
+
+    struct EventSummary {
+        uint id;
+        string name;
+        bool finalized;
+        uint totalPool;
     }
 
     struct Bet {
@@ -26,6 +33,7 @@ contract BettingSystem {
         uint totalPool;
     }
 
+    uint public totalEvents;
     mapping(uint => address[]) public eventParticipants;
     mapping(uint => Event) public events;
     mapping(uint => FinalizedEvent) public finalizedEvents;
@@ -54,6 +62,8 @@ contract BettingSystem {
         emit Deposit(msg.sender, msg.value);
     }
 
+
+
     // Criar novo evento
     function createEvent(string memory name, string[] memory outcomes) external {
         require(outcomes.length > 1, "Event must have at least two outcomes");
@@ -74,45 +84,114 @@ contract BettingSystem {
         eventCounter++;
     }
 
+    function getEventOutcomes(uint eventId) external view returns (string[] memory) {
+        return events[eventId].outcomes;
+    }
+
+       // Função para retornar o nome do evento
+    function getEventName(uint eventId) external view returns (string memory) {
+        return events[eventId].name;
+    }
+
+    // Função para retornar as odds de um resultado específico
+    function getEventOdds(uint eventId, string memory outcome) external view returns (uint) {
+        return events[eventId].odds[outcome];
+    }
+
+    // Função para retornar o total apostado em um resultado específico
+    function getEventTotalBets(uint eventId, string memory outcome) external view returns (uint) {
+        return events[eventId].totalBets[outcome];
+    }
+
+    // Função para verificar se o evento está finalizado
+    function isEventFinalized(uint eventId) external view returns (bool) {
+        return events[eventId].finalized;
+    }
+
+    // Função para retornar o resultado de um evento finalizado
+    function getEventResult(uint eventId) external view returns (string memory) {
+        return events[eventId].result;
+    }
+
+    // Função para retornar o total do pool de um evento
+    function getEventTotalPool(uint eventId) external view returns (uint) {
+        return events[eventId].totalPool;
+    }
+
+    function getAllEventIds() external view returns (uint[] memory) {
+        uint[] memory eventIds = new uint[](eventCounter);
+        for (uint i = 0; i < eventCounter; i++) {
+            eventIds[i] = events[i].id;
+        }
+        return eventIds;
+    }
+
+
+    function getAllEvents() external view returns (EventSummary[] memory) {
+        EventSummary[] memory allEvents = new EventSummary[](eventCounter);
+        for (uint i = 0; i < eventCounter; i++) {
+            Event storage currentEvent = events[i];
+            allEvents[i] = EventSummary({
+                id: currentEvent.id,
+                name: currentEvent.name,
+                finalized: currentEvent.finalized,
+                totalPool: currentEvent.totalPool
+            });
+        }
+        return allEvents;
+    }
+
+    
+
+    function getUserInfo(address user) external view returns (uint balance, Bet[] memory bets) {
+        return (balances[user], userBets[user]);
+    }
+
     // Retorna a odd de um resultado específico em um evento    
     function getOdds(uint eventId, string memory outcome) public view returns (uint) {
         return events[eventId].odds[outcome];
     }
 
     // Apostar em um evento
-    function placeBet(uint256 eventId, string memory outcome) external payable {
-        require(msg.value > 0, "Bet amount must be greater than zero");
+function placeBet(uint256 eventId, string memory outcome, uint256 amount) external {
+    require(amount > 0, "Bet amount must be greater than zero");
 
-        Event storage bettingEvent = events[eventId];
-        require(!bettingEvent.finalized, "Event is already finalized");
-        require(balances[msg.sender] >= msg.value, "Insufficient balance");
+    Event storage bettingEvent = events[eventId];
+    require(!bettingEvent.finalized, "Event is already finalized");
+    require(balances[msg.sender] >= amount, "Insufficient balance");
 
-        uint256 odd = bettingEvent.odds[outcome];
-        require(odd > 0, "Invalid outcome");
+    uint256 odd = bettingEvent.odds[outcome];
+    require(odd > 0, "Invalid outcome");
 
-        bettingEvent.totalBets[outcome] += msg.value;
-        bettingEvent.totalPool += msg.value;
+    // Subtrair o valor da aposta do saldo do usuário
+    balances[msg.sender] -= amount;
 
-        userBets[msg.sender].push(Bet(eventId, outcome, msg.value));
+    // Atualizar o total apostado no resultado e o pool total do evento
+    bettingEvent.totalBets[outcome] += amount;
+    bettingEvent.totalPool += amount;
 
-        bool isParticipant = false;
-        for (uint i = 0; i < eventParticipants[eventId].length; i++) {
-            if (eventParticipants[eventId][i] == msg.sender) {
-                isParticipant = true;
-                break;
-            }
+    // Registrar a aposta do usuário
+    userBets[msg.sender].push(Bet(eventId, outcome, amount));
+
+    // Registrar participante se ainda não estiver na lista
+    bool isParticipant = false;
+    for (uint i = 0; i < eventParticipants[eventId].length; i++) {
+        if (eventParticipants[eventId][i] == msg.sender) {
+            isParticipant = true;
+            break;
         }
-
-        if (!isParticipant) {
-            eventParticipants[eventId].push(msg.sender);
-            emit ParticipantRegistered(msg.sender, eventId);
-        }
-
-        // Atualizar odds dinamicamente
-        updateOdds(eventId);
-
-        emit BetPlaced(msg.sender, eventId, outcome, msg.value);
     }
+
+    if (!isParticipant) {
+        eventParticipants[eventId].push(msg.sender);
+        emit ParticipantRegistered(msg.sender, eventId);
+    }
+
+    // Atualizar odds dinamicamente
+    updateOdds(eventId);
+
+    emit BetPlaced(msg.sender, eventId, outcome, amount);
+}
 
 function updateOdds(uint eventId) internal {
         Event storage bettingEvent = events[eventId];
@@ -193,11 +272,15 @@ function updateOdds(uint eventId) internal {
     // Sacar saldo
     function withdraw() external {
         uint amount = balances[msg.sender];
-        require(amount > 0, "No balance to withdraw");
 
         balances[msg.sender] = 0;
-        payable(msg.sender).transfer(amount);
+        (bool success, ) = payable(msg.sender).call{value: amount}("");
+        require(success, "Withdrawal failed");
 
         emit Withdrawal(msg.sender, amount);
+    }
+
+    function getMyBalance() external view returns (uint) {
+        return balances[msg.sender];
     }
 }
