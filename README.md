@@ -1,4 +1,9 @@
 # Problema 3- BET Distribuída
+
+Frontend - https://github.com/Nalbertsan/betfront
+Backend - https://github.com/Nalbertsan/littertiger
+Contrato - Repositório atual
+
 ## Dupla: Pedro Henrique Araujo Almeida e Nalbert Santos
 
 # Introdução 
