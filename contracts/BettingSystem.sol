@@ -84,6 +84,7 @@ contract BettingSystem {
         eventCounter++;
     }
 
+    // Pegar todos os lados
     function getEventOutcomes(uint eventId) external view returns (string[] memory) {
         return events[eventId].outcomes;
     }
@@ -117,7 +118,7 @@ contract BettingSystem {
     function getEventTotalPool(uint eventId) external view returns (uint) {
         return events[eventId].totalPool;
     }
-
+    // Pegar dos os eventos IDS
     function getAllEventIds() external view returns (uint[] memory) {
         uint[] memory eventIds = new uint[](eventCounter);
         for (uint i = 0; i < eventCounter; i++) {
@@ -126,7 +127,7 @@ contract BettingSystem {
         return eventIds;
     }
 
-
+    // Pegar todos os eventos
     function getAllEvents() external view returns (EventSummary[] memory) {
         EventSummary[] memory allEvents = new EventSummary[](eventCounter);
         for (uint i = 0; i < eventCounter; i++) {
@@ -193,6 +194,7 @@ function placeBet(uint256 eventId, string memory outcome, uint256 amount) extern
     emit BetPlaced(msg.sender, eventId, outcome, amount);
 }
 
+// Update de odds dinamicamente 
 function updateOdds(uint eventId) internal {
         Event storage bettingEvent = events[eventId];
         uint totalPool = bettingEvent.totalPool;
@@ -280,6 +282,7 @@ function updateOdds(uint eventId) internal {
         emit Withdrawal(msg.sender, amount);
     }
 
+    // Saldo depositado no contrato
     function getMyBalance() external view returns (uint) {
         return balances[msg.sender];
     }
